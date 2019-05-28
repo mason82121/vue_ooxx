@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+ 
+  <style>
+    [v-cloak]{
+      display:none;
+    }
+    .result {
+      display: block;
+    }
+
+    .fade-enter,
+    .fade-leave-to {
+      opacity: 0;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.5s;
+    }
+  </style>
+  <div id="app" v-cloak>
+    <div class="board">
+      <div
+        class="section"
+        v-for="(num,index) in sections"
+        :key="index"
+        :class="{circle:num === 1,cross:num === 10}"
+        @click="clickHandler(index)"
+      ></div>
+    </div>
+
+    <div class="name
+        ">
+      <span>player:</span>
+      <div class="player
+        ">
+        <div :class="{circle:step%2===0,cross:step%2===1}"></div>
+      </div>
+
+      <div
+        class="reset"
+        @click="resetHandler();test($event);"
+      >
+        reset
+      </div>
+    </div>
+
+    <transition name="fade">
+      <div
+        class="result"
+        v-if="winner"
+        @click="resetHandler"
+      >
+        {{ winner }} Win!!! Click to Reset.
+      </div>
+    </transition>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.8/vue.js'></script>
+  <script src="index.js"></script>
+</body>
+
+</html>
